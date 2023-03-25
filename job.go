@@ -3,12 +3,12 @@ package job
 import "time"
 
 type Job struct {
-	fn   func(...any)
-	args []any
+	Fn   func(...any)
+	Args []any
 }
 
 func (j Job) Run() {
-	j.fn(j.args...)
+	j.Fn(j.Args...)
 }
 
 func (j Job) ScheduleRecurring(interval time.Duration) *time.Ticker {
