@@ -48,5 +48,5 @@ func main() {
 ```
 ## Import in your project by go-get
 ```bash
-go get github.com/shaswata56/job@v1.0.0
+go get github.com/shaswata56/job
 ```
