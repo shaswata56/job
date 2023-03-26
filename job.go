@@ -11,22 +11,22 @@ func (j Job) run() {
 	j.Fn(j.Args...)
 }
 
-func (j Job) ScheduleRecurring(interval time.Duration) *time.Ticker {
+func (j Job) ScheduleRecurring(interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	go func() {
 		for range ticker.C {
 			go j.run()
+			ticker.Stop()
 		}
 	}()
-	return ticker
 }
 
-func (j Job) ScheduleOneTime(at time.Time) *time.Timer {
+func (j Job) ScheduleOneTime(at time.Time) {
 	delay := time.Until(at)
 	timer := time.NewTimer(delay)
 	go func() {
 		<-timer.C
 		go j.run()
+		timer.Stop()
 	}()
-	return timer
 }
