@@ -7,7 +7,7 @@ type Job struct {
 	Args []any
 }
 
-func (j Job) Run() {
+func (j Job) run() {
 	j.Fn(j.Args...)
 }
 
@@ -15,7 +15,7 @@ func (j Job) ScheduleRecurring(interval time.Duration) *time.Ticker {
 	ticker := time.NewTicker(interval)
 	go func() {
 		for range ticker.C {
-			go j.Run()
+			go j.run()
 		}
 	}()
 	return ticker
@@ -26,7 +26,7 @@ func (j Job) ScheduleOneTime(at time.Time) *time.Timer {
 	timer := time.NewTimer(delay)
 	go func() {
 		<-timer.C
-		go j.Run()
+		go j.run()
 	}()
 	return timer
 }
