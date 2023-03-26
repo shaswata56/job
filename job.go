@@ -16,7 +16,6 @@ func (j Job) ScheduleRecurring(interval time.Duration) {
 	go func() {
 		for range ticker.C {
 			go j.run()
-			ticker.Stop()
 		}
 	}()
 }
