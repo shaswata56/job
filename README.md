@@ -41,8 +41,7 @@ func main() {
 		Fn:   GetWeatherNow,
 		Args: myArgs,
 	}
-	ticker := myJob.ScheduleRecurring(time.Second * 2)
-	defer ticker.Stop()
+	myJob.ScheduleRecurring(time.Second * 2)
 	time.Sleep(time.Minute)
 }
 ```
